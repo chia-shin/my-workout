@@ -11,6 +11,15 @@
         /* 隱藏滾動條但保持功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 關鍵：強制拔除 iOS 原生輸入框的頑固樣式與不對稱襯墊 */
+        input[type="date"], input[type="time"], select, input[type="text"] {
+            -webkit-appearance: none;
+            appearance: none;
+            line-height: normal !important; /* 修正 iOS 行高怪癖 */
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-100 p-4 font-sans max-w-md mx-auto pb-24">
@@ -38,50 +47,60 @@
         <div class="bg-gray-800 p-5 rounded-2xl shadow-xl border border-gray-700">
             <form id="workoutForm" class="space-y-4">
                 
-                <div class="grid grid-cols-2 gap-3 items-end">
-                    <div class="w-full">
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">📅 日期</label>
-                        <input type="date" id="date" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 box-border text-center" required>
+                <div class="flex gap-3 w-full">
+                    <div class="flex-1 flex flex-col">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">📅 日期</label>
+                        <div class="flex items-center justify-center bg-gray-700 rounded-xl border border-gray-600 focus-within:border-emerald-500 h-14 overflow-hidden">
+                            <input type="date" id="date" class="w-full h-full bg-transparent text-white px-3 text-center focus:outline-none" required>
+                        </div>
                     </div>
-                    <div class="w-full">
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏰ 開始時間</label>
-                        <input type="time" id="startTime" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 box-border text-center" required>
+                    <div class="flex-1 flex flex-col">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏰ 開始時間</label>
+                        <div class="flex items-center justify-center bg-gray-700 rounded-xl border border-gray-600 focus-within:border-emerald-500 h-14 overflow-hidden">
+                            <input type="time" id="startTime" class="w-full h-full bg-transparent text-white px-3 text-center focus:outline-none" required>
+                        </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏳ 持續時間</label>
-                        <select id="duration" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 text-center" required>
-                            <option value="15">15 分鐘</option>
-                            <option value="30">30 分鐘</option>
-                            <option value="45">45 分鐘</option>
-                            <option value="60" selected>60 分鐘</option>
-                            <option value="75">75 分鐘</option>
-                            <option value="90">90 分鐘</option>
-                            <option value="105">105 分鐘</option>
-                            <option value="120">120 分鐘</option>
-                            <option value="150">150 分鐘</option>
-                            <option value="180">180 分鐘</option>
-                        </select>
+                <div class="flex gap-3 w-full">
+                    <div class="flex-1 flex flex-col">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏳ 持續時間</label>
+                        <div class="flex items-center justify-center bg-gray-700 rounded-xl border border-gray-600 h-14 overflow-hidden">
+                            <select id="duration" class="w-full h-full bg-transparent text-white px-3 text-center focus:outline-none" required>
+                                <option value="15">15 分鐘</option>
+                                <option value="30">30 分鐘</option>
+                                <option value="45">45 分鐘</option>
+                                <option value="60" selected>60 分鐘</option>
+                                <option value="75">75 分鐘</option>
+                                <option value="90">90 分鐘</option>
+                                <option value="105">105 分鐘</option>
+                                <option value="120">120 分鐘</option>
+                                <option value="150">150 分鐘</option>
+                                <option value="180">180 分鐘</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">🏃 運動類型</label>
-                        <select id="sportType" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 text-center" required>
-                            <option value="重量訓練">重量訓練</option>
-                            <option value="有氧運動">有氧運動</option>
-                            <option value="高強度間歇 (HIIT)">高強度間歇 (HIIT)</option>
-                            <option value="瑜珈 / 伸展">瑜珈 / 伸展</option>
-                            <option value="皮拉提斯">皮拉提斯</option>
-                            <option value="拳擊 / 格鬥">拳擊 / 格鬥</option>
-                            <option value="其它">其它</option>
-                        </select>
+                    <div class="flex-1 flex flex-col">
+                        <label class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">🏃 運動類型</label>
+                        <div class="flex items-center justify-center bg-gray-700 rounded-xl border border-gray-600 h-14 overflow-hidden">
+                            <select id="sportType" class="w-full h-full bg-transparent text-white px-3 text-center focus:outline-none" required>
+                                <option value="重量訓練">重量訓練</option>
+                                <option value="有氧運動">有氧運動</option>
+                                <option value="高強度間歇 (HIIT)">高強度間歇 (HIIT)</option>
+                                <option value="瑜珈 / 伸展">瑜珈 / 伸展</option>
+                                <option value="皮拉提斯">皮拉提斯</option>
+                                <option value="拳擊 / 格鬥">拳擊 / 格鬥</option>
+                                <option value="其它">其它</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">👤 指導教練</label>
-                    <input type="text" id="coach" placeholder="自主訓練（或輸入教練名字）" class="w-full h-14 bg-gray-700 rounded-xl px-4 text-white border border-gray-600 focus:outline-none focus:border-emerald-500">
+                    <div class="flex items-center bg-gray-700 rounded-xl border border-gray-600 h-14 overflow-hidden">
+                        <input type="text" id="coach" placeholder="自主訓練（或輸入教練名字）" class="w-full h-full bg-transparent text-white px-4 focus:outline-none">
+                    </div>
                 </div>
 
                 <div>
