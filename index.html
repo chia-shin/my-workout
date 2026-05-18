@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>運動數位筆記</title>
-    <!-- iPhone 全螢幕 App 模式設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +15,6 @@
 </head>
 <body class="bg-gray-900 text-gray-100 p-4 font-sans max-w-md mx-auto pb-24">
 
-    <!-- 頂部標頭 -->
     <header class="mb-4 pt-4 flex justify-between items-center">
         <div>
             <h1 class="text-2xl font-bold text-emerald-400">🏋️ 運動數位筆記</h1>
@@ -27,9 +25,6 @@
         </button>
     </header>
 
-    ---
-
-    <!-- 分頁切換頁籤 (固定在頂部下方) -->
     <div class="flex bg-gray-800 p-1 rounded-xl mb-5 border border-gray-700 text-sm font-medium">
         <button id="tab-form" onclick="switchTab('form')" class="w-1/2 py-2.5 text-center rounded-lg transition duration-150 bg-emerald-500 text-gray-900 font-bold">
             ✍️ 新增紀錄
@@ -39,27 +34,25 @@
         </button>
     </div>
 
-    <!-- ================= 分頁 1: 新增紀錄 ================= -->
     <div id="page-form" class="space-y-4">
         <div class="bg-gray-800 p-5 rounded-2xl shadow-xl border border-gray-700">
             <form id="workoutForm" class="space-y-4">
-                <!-- 日期與開始時間 -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">📅 日期</label>
-                        <input type="date" id="date" class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500" required>
+                
+                <div class="grid grid-cols-2 gap-3 items-end">
+                    <div class="w-full">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">📅 日期</label>
+                        <input type="date" id="date" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 box-border text-center" required>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">⏰ 開始時間</label>
-                        <input type="time" id="startTime" class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500" required>
+                    <div class="w-full">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏰ 開始時間</label>
+                        <input type="time" id="startTime" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 box-border text-center" required>
                     </div>
                 </div>
 
-                <!-- 持續時間與運動類型 -->
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">⏳ 持續時間</label>
-                        <select id="duration" class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500" required>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">⏳ 持續時間</label>
+                        <select id="duration" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 text-center" required>
                             <option value="15">15 分鐘</option>
                             <option value="30">30 分鐘</option>
                             <option value="45">45 分鐘</option>
@@ -73,8 +66,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">🏃 運動類型</label>
-                        <select id="sportType" class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500" required>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">🏃 運動類型</label>
+                        <select id="sportType" class="w-full h-14 bg-gray-700 rounded-xl px-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 text-center" required>
                             <option value="重量訓練">重量訓練</option>
                             <option value="有氧運動">有氧運動</option>
                             <option value="高強度間歇 (HIIT)">高強度間歇 (HIIT)</option>
@@ -86,16 +79,14 @@
                     </div>
                 </div>
 
-                <!-- 教練名稱 -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">👤 指導教練</label>
-                    <input type="text" id="coach" placeholder="自主訓練（或輸入教練名字）" class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500">
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">👤 指導教練</label>
+                    <input type="text" id="coach" placeholder="自主訓練（或輸入教練名字）" class="w-full h-14 bg-gray-700 rounded-xl px-4 text-white border border-gray-600 focus:outline-none focus:border-emerald-500">
                 </div>
 
-                <!-- 備註 -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">📝 運動備註</label>
-                    <textarea id="notes" rows="3" placeholder="紀錄今天的心得、課表細節或身體狀態..." class="w-full bg-gray-700 rounded-xl p-3 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 resize-none"></textarea>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">📝 運動備註</label>
+                    <textarea id="notes" rows="3" placeholder="紀錄今天的心得、課表細節或身體狀態..." class="w-full bg-gray-700 rounded-xl p-4 text-white border border-gray-600 focus:outline-none focus:border-emerald-500 resize-none"></textarea>
                 </div>
 
                 <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-gray-900 font-bold p-3.5 rounded-xl transition duration-200 mt-2 active:scale-95 shadow-lg shadow-emerald-500/20 text-base">
@@ -105,10 +96,7 @@
         </div>
     </div>
 
-
-    <!-- ================= 分頁 2: 歷史查詢 ================= -->
     <div id="page-history" class="hidden space-y-4">
-        <!-- 篩選選單列 -->
         <div class="bg-gray-800 p-3 rounded-xl border border-gray-700 flex items-center justify-between sticky top-2 z-10 shadow-lg">
             <span class="text-xs font-semibold text-gray-400 ml-1">🎯 篩選運動項目:</span>
             <select id="filterSportType" onchange="renderLogs()" class="bg-gray-700 rounded-lg p-2 text-sm text-white border border-gray-600 focus:outline-none focus:border-emerald-500 max-w-[60%]">
@@ -123,10 +111,8 @@
             </select>
         </div>
 
-        <!-- 歷史紀錄容器 -->
         <div id="logsContainer" class="space-y-3">
-            <!-- 紀錄會由 JS 動態生成 -->
-        </div>
+            </div>
     </div>
 
     <script>
@@ -149,18 +135,16 @@
             const pageHistory = document.getElementById('page-history');
 
             if (tab === 'form') {
-                // 激活新增表單
                 btnForm.className = "w-1/2 py-2.5 text-center rounded-lg transition duration-150 bg-emerald-500 text-gray-900 font-bold";
                 btnHistory.className = "w-1/2 py-2.5 text-center rounded-lg transition duration-150 text-gray-400 hover:text-gray-200";
                 pageForm.classList.remove('hidden');
                 pageHistory.classList.add('hidden');
             } else {
-                // 激活歷史紀錄
                 btnHistory.className = "w-1/2 py-2.5 text-center rounded-lg transition duration-150 bg-emerald-500 text-gray-900 font-bold";
                 btnForm.className = "w-1/2 py-2.5 text-center rounded-lg transition duration-150 text-gray-400 hover:text-gray-200";
                 pageForm.classList.add('hidden');
                 pageHistory.classList.remove('hidden');
-                renderLogs(); // 切換過來時重新渲染資料
+                renderLogs();
             }
         }
 
@@ -170,17 +154,15 @@
             return logs ? JSON.parse(logs) : [];
         }
 
-        // 渲染歷史紀錄 (包含篩選功能)
+        // 渲染歷史紀錄
         function renderLogs() {
             let logs = getLogs();
             const filterValue = document.getElementById('filterSportType').value;
 
-            // 進行下拉選單篩選
             if (filterValue !== '全部') {
                 logs = logs.filter(log => log.sportType === filterValue);
             }
 
-            // 時間排序：最新的排最上面
             logs.sort((a, b) => {
                 const dateTimeA = new Date(`${a.date}T${a.startTime}`);
                 const dateTimeB = new Date(`${b.date}T${b.startTime}`);
@@ -242,11 +224,9 @@
             logs.push(newLog);
             localStorage.setItem('workout_logs_v2', JSON.stringify(logs));
 
-            // 清空填寫內容（保留日期與時間，方便連續紀錄）
             document.getElementById('coach').value = '';
             document.getElementById('notes').value = '';
             
-            // 貼心體驗：儲存後自動切換到歷史分頁查看最新紀錄
             switchTab('history');
         });
 
