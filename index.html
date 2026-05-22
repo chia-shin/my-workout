@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>運動數位筆記 v2.1.0</title>
+    <title>運動數位筆記 v2.2.0</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -196,7 +196,6 @@
                 return;
             }
 
-            // 回復舒適的 p-2.5 留白，把高度留給純淨的文字
             logsContainer.innerHTML = logs.map((log) => `
                 <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col">
                     <div class="flex justify-between items-center mb-1.5">
@@ -230,9 +229,12 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // 使用強力正規表達式，強制清洗掉首尾所有的隱形換行、特殊空白符號
-            const cleanCoach = document.getElementById('coach').value.replace(/^\s+|\s+$/g, '');
-            const cleanNotes = document.getElementById('notes').value.replace(/^\s+|\s+$/g, '');
+            // 雙重保險：原生 trim() 加上正規表達式地毯式清洗
+            let rawCoach = document.getElementById('coach').value;
+            let rawNotes = document.getElementById('notes').value;
+
+            const cleanCoach = rawCoach.trim().replace(/^\s+|\s+$/g, '');
+            const cleanNotes = rawNotes.trim().replace(/^\s+|\s+$/g, '');
             
             const newLog = {
                 id: Date.now().toString(),
