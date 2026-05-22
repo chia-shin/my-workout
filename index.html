@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>運動數位筆記</title>
+    <title>運動數位筆記 v2.0.2</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,7 @@
         input[type="date"], input[type="time"], select, input[type="text"] {
             -webkit-appearance: none;
             appearance: none;
-            line-height: normal !important; /* 修正 iOS 行高怪癖 */
+            line-height: normal !important;
             padding-top: 0 !important;
             padding-bottom: 0 !important;
         }
@@ -196,10 +196,10 @@
                 return;
             }
 
-            // 修正渲染逻辑：精準控製內建卡片中教練與備註之間的垂直間距
+            // 完全拔除卡片內部的 space-y-2.5，改用精準的 margin 控制，避免產生幽靈空白行
             logsContainer.innerHTML = logs.map((log) => `
-                <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col space-y-2.5">
-                    <div class="flex justify-between items-start">
+                <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col">
+                    <div class="flex justify-between items-start mb-2">
                         <div>
                             <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-medium mb-1">
                                 ${log.sportType}
@@ -214,12 +214,12 @@
                     </div>
                     
                     ${log.coach ? `
-                    <div class="text-xs text-gray-300 flex items-center">
+                    <div class="text-xs text-gray-300 flex items-center mb-2">
                         <span class="text-gray-500 mr-1">👤 教練:</span> ${log.coach}
                     </div>` : ''}
 
                     ${log.notes ? `
-                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-0.5">
+                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line">
                         ${log.notes}
                     </div>` : ''}
                 </div>
