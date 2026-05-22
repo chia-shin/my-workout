@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>運動數位筆記 v2.0.8</title>
+    <title>運動數位筆記 v2.1.0</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -196,7 +196,7 @@
                 return;
             }
 
-            // 精確調整備註方塊內部的 Padding，解決文字頂部留白過多的問題
+            // 回復舒適的 p-2.5 留白，把高度留給純淨的文字
             logsContainer.innerHTML = logs.map((log) => `
                 <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col">
                     <div class="flex justify-between items-center mb-1.5">
@@ -219,7 +219,7 @@
                     </div>
 
                     ${log.notes ? `
-                    <div class="text-sm bg-gray-900/40 pt-1.5 pb-2.5 px-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-2">
+                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-2.5">
                         ${log.notes}
                     </div>` : ''}
                 </div>
@@ -230,14 +230,18 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // 使用強力正規表達式，強制清洗掉首尾所有的隱形換行、特殊空白符號
+            const cleanCoach = document.getElementById('coach').value.replace(/^\s+|\s+$/g, '');
+            const cleanNotes = document.getElementById('notes').value.replace(/^\s+|\s+$/g, '');
+            
             const newLog = {
                 id: Date.now().toString(),
                 date: document.getElementById('date').value,
                 startTime: document.getElementById('startTime').value,
                 duration: document.getElementById('duration').value,
                 sportType: document.getElementById('sportType').value,
-                coach: document.getElementById('coach').value.trim(),
-                notes: document.getElementById('notes').value.trim()
+                coach: cleanCoach,
+                notes: cleanNotes
             };
 
             const logs = getLogs();
