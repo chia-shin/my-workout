@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>運動數位筆記 v2.0.2</title>
+    <title>運動數位筆記 v2.0.5</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,7 +12,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* 關鍵：強制拔除 iOS 原生輸入框的頑固樣式與不對稱襯墊 */
+        /* 強制拔除 iOS 原生輸入框的頑固樣式與不對稱襯墊 */
         input[type="date"], input[type="time"], select, input[type="text"] {
             -webkit-appearance: none;
             appearance: none;
@@ -196,30 +196,30 @@
                 return;
             }
 
-            // 完全拔除卡片內部的 space-y-2.5，改用精準的 margin 控制，避免產生幽靈空白行
+            // 優化後的卡片 HTML 渲染邏輯
             logsContainer.innerHTML = logs.map((log) => `
                 <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-medium mb-1">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-medium">
                                 ${log.sportType}
                             </span>
-                            <div class="text-xs text-gray-400 font-mono">
-                                📅 ${log.date} ｜ ⏰ ${log.startTime} (${log.duration}分鐘)
-                            </div>
+                            ${log.coach ? `
+                            <span class="inline-block bg-gray-700 text-gray-300 text-[11px] px-2 py-0.5 rounded-md border border-gray-600">
+                                👤 ${log.coach}
+                            </span>` : ''}
                         </div>
                         <button onclick="deleteLog('${log.id}')" class="text-gray-500 hover:text-red-400 p-1 text-sm active:scale-90 transition">
                             🗑️
                         </button>
                     </div>
                     
-                    ${log.coach ? `
-                    <div class="text-xs text-gray-300 flex items-center mb-2">
-                        <span class="text-gray-500 mr-1">👤 教練:</span> ${log.coach}
-                    </div>` : ''}
+                    <div class="text-xs text-gray-400 font-mono">
+                        📅 ${log.date} ｜ ⏰ ${log.startTime} (${log.duration}分鐘)
+                    </div>
 
                     ${log.notes ? `
-                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line">
+                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-3">
                         ${log.notes}
                     </div>` : ''}
                 </div>
