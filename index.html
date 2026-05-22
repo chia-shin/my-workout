@@ -196,8 +196,9 @@
                 return;
             }
 
+            // 修正渲染逻辑：精準控製內建卡片中教練與備註之間的垂直間距
             logsContainer.innerHTML = logs.map((log) => `
-                <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col space-y-2">
+                <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col space-y-2.5">
                     <div class="flex justify-between items-start">
                         <div>
                             <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-medium mb-1">
@@ -218,7 +219,7 @@
                     </div>` : ''}
 
                     ${log.notes ? `
-                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line">
+                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-0.5">
                         ${log.notes}
                     </div>` : ''}
                 </div>
