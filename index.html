@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>運動數位筆記 v2.0.5</title>
+    <title>運動數位筆記 v2.0.8</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -196,10 +196,10 @@
                 return;
             }
 
-            // 優化後的卡片 HTML 渲染邏輯
+            // 精確調整備註方塊內部的 Padding，解決文字頂部留白過多的問題
             logsContainer.innerHTML = logs.map((log) => `
                 <div class="bg-gray-800 p-4 rounded-xl border border-gray-700/60 shadow-md flex flex-col">
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex justify-between items-center mb-1.5">
                         <div class="flex items-center gap-2">
                             <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-md font-medium">
                                 ${log.sportType}
@@ -219,7 +219,7 @@
                     </div>
 
                     ${log.notes ? `
-                    <div class="text-sm bg-gray-900/40 p-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-3">
+                    <div class="text-sm bg-gray-900/40 pt-1.5 pb-2.5 px-2.5 rounded-lg text-gray-300 border border-gray-700/40 whitespace-pre-line mt-2">
                         ${log.notes}
                     </div>` : ''}
                 </div>
